@@ -1,0 +1,3 @@
+package: dolartodaydeamon
+import:
+- package: gopkg.in/mgo.v2
