@@ -2,17 +2,16 @@ package controller
 
 import (
 	"encoding/json"
-	"net/http"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"net/http"
 )
 
 type idGenerator struct {
 	db  *mgo.Database
-	N   int `bson:"n"`
-	Key string  // Don't forget to add an unique index to this field.
+	N   int    `bson:"n"`
+	Key string // Don't forget to add an unique index to this field.
 }
-
 
 func NewIDGenerator(db *mgo.Database) *idGenerator {
 	return &idGenerator{
@@ -42,7 +41,6 @@ func (idg *idGenerator) Next(key string) (int, error) {
 	return r.N, nil
 }
 
-
 func GetJson(url string, target interface{}) error {
 	r, err := http.Get(url)
 	if err != nil {
@@ -52,5 +50,3 @@ func GetJson(url string, target interface{}) error {
 
 	return json.NewDecoder(r.Body).Decode(target)
 }
-
-

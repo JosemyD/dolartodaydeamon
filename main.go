@@ -5,7 +5,7 @@ import (
 	"dolartodaydeamon/model"
 	"gopkg.in/mgo.v2"
 	//"gopkg.in/mgo.v2/bson"
-	"log"
+	"fmt"
 )
 
 func main() {
@@ -14,22 +14,28 @@ func main() {
 		panic(err)
 	}
 
-	c := session.DB("dolartoday").C("indicadores")
+	db := session.DB("dolartoday")
+	c := db.C("indicadores")
 
 	defer session.Close()
 
-	indicador := model.Indicadores{}
-	controller.GetJson("https://s3.amazonaws.com/dolartoday/data.json", &indicador)
+	dolarToday := model.Indicadores{}
+	controller.GetJson("https://s3.amazonaws.com/dolartoday/data.json", &dolarToday.DOLARTODAY)
 
-	withMetadata =
-	err = c.Insert(&indicador)
+	idg := controller.NewIDGenerator(db)
 
-	if err != nil {
-		log.Fatal(err)
+	for i := 0; i < 100; i++ {
+		n, err := idg.Next("my-document")
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(n)
+		withMetadata := model.Metadata{}
+		withMetadata.Metadata(n)
+		dolarToday.AgregarMetadata(withMetadata)
+		err = c.Insert(&dolarToday)
+		if err != nil {
+			panic(err)
+		}
 	}
-
-
-/*	foo2 := model.DolarToday{}
-	controller.GetJson("https://s3.amazonaws.com/dolartoday/data.json", &foo2)
-	println(foo2.BCV.Reservas)*/
 }
