@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+/*Autoincrement ID Mongo*/
 type idGenerator struct {
 	db  *mgo.Database
 	N   int    `bson:"n"`
@@ -41,6 +42,7 @@ func (idg *idGenerator) Next(key string) (int, error) {
 	return r.N, nil
 }
 
+/*Get Json from API*/
 func GetJson(url string, target interface{}) error {
 	r, err := http.Get(url)
 	if err != nil {
@@ -49,4 +51,17 @@ func GetJson(url string, target interface{}) error {
 	defer r.Body.Close()
 
 	return json.NewDecoder(r.Body).Decode(target)
+}
+
+/*Connect Mongodb*/
+func Connect(dbHost *string, dbPort *string, dbName *string) (*mgo.Database, error) {
+
+	session, err := mgo.Dial(*dbHost + ":" + *dbPort)
+	if err != nil {
+		panic(err)
+	}
+
+	db := session.DB(*dbName)
+
+	return db, err
 }

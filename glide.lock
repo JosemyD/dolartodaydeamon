@@ -1,6 +1,13 @@
-hash: 61beedefb8af5a0000dffa5ac33548e7d9892a3cd1fc3937600dca0c4c12c9f0
-updated: 2016-11-27T13:49:29.643389203-04:00
+hash: 809931fd4ac1d48f03f420951d708e224ce580694ac11221be84b5317f3e8898
+updated: 2016-11-30T17:09:35.94631946-04:00
 imports:
+- name: github.com/vharitonsky/iniflags
+  version: 743d6901e7ca8ab61ac533a8c49939ac8b560e72
 - name: gopkg.in/mgo.v2
   version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/json
+  - internal/sasl
+  - internal/scram
 testImports: []
