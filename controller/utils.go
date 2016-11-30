@@ -54,14 +54,14 @@ func GetJson(url string, target interface{}) error {
 }
 
 /*Connect Mongodb*/
-func Connect(dbHost *string, dbPort *string, dbName *string) (*mgo.Database, error) {
+func Connect(dialInfo *mgo.DialInfo) (*mgo.Database, error) {
 
-	session, err := mgo.Dial(*dbHost + ":" + *dbPort)
+	session, err := mgo.DialWithInfo(dialInfo)
 	if err != nil {
 		panic(err)
 	}
 
-	db := session.DB(*dbName)
+	db := session.DB("")
 
 	return db, err
 }
