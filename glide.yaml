@@ -3,3 +3,11 @@ import:
 - package: gopkg.in/mgo.v2
 - package: github.com/vharitonsky/iniflags
 - package: github.com/mitchellh/hashstructure
+- package: github.com/kataras/iris
+  version: ^4.0.0
+- package: github.com/imdario/mergo
+  version: ^0.2.2
+- package: gopkg.in/square/go-jose.v1
+  version: ^2.0.1
+  subpackages:
+  - cipher
