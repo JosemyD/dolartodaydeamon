@@ -6,10 +6,8 @@ import (
 	"flag"
 	"github.com/vharitonsky/iniflags"
 	"gopkg.in/mgo.v2"
-	//	"gopkg.in/mgo.v2/bson"
 	"log"
 	"time"
-
 	"github.com/mitchellh/hashstructure"
 )
 
@@ -88,6 +86,6 @@ func main() {
 		} else {
 			panic(err)
 		}
-		time.Sleep(7 * time.Second)
+		time.Sleep(60 * 15 * time.Second)
 	}
 }
