@@ -1,0 +1,15 @@
+{
+  "name": "Dolar Today Deamon",
+  "description": "Just check for difference on Dolar Today",
+  "keywords": [
+    "iris",
+    "go",
+    "dolarToday",
+    "venezuela",
+    "dolar"
+  ],
+  "image": "heroku/go:1.7",
+  "mount_dir": "src/github.com/JosemyD/dolartodaydeamon",
+  "website": "http://github.com/JosemyD/dolartodaydeamon",
+  "repository": "https://github.com/JosemyD/dolartodaydeamon"
+}

@@ -1,10 +1,10 @@
-hash: 8b17380f968316481fd70e7f44263bfeb8426f3487136c8f6a0a2a19dab1a619
-updated: 2016-12-01T11:36:16.488527007-04:00
+hash: e2718469babdc1db9274487f4905ad595d57ae9d2a8457befb0fc3735b78d978
+updated: 2016-12-01T15:08:44.751444202-04:00
 imports:
 - name: github.com/fatih/structs
   version: dc3312cb1a4513a366c4c9e622ad55c32df12ed3
 - name: github.com/google/go-github
-  version: 4e2c2aeb92b9a57d97165d1624ff66b2aabee111
+  version: dccec7b5f17234b8219494c2b5b03af034e08c04
   subpackages:
   - github
 - name: github.com/google/go-querystring
@@ -21,10 +21,6 @@ imports:
   version: 095d7f6459c501cb15319aa2754afa221b81a3ec
   subpackages:
   - acme
-- name: github.com/iris-contrib/middleware
-  version: d918054efd6f421666f2e23da1e0c11629e98126
-  subpackages:
-  - logger
 - name: github.com/kataras/go-errors
   version: 0f977b82cc78d5d31bb75fb6f903ad9e852c8bbd
 - name: github.com/kataras/iris
@@ -71,7 +67,7 @@ imports:
   - acme/autocert
   - ocsp
 - name: golang.org/x/net
-  version: 4971afdc2f162e82d185353533d3cf16188a9f4e
+  version: f315505cf3349909cdf013ea56690da34e96a451
   subpackages:
   - context
   - context/ctxhttp
