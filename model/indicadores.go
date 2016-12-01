@@ -9,8 +9,8 @@ var PATH_INDICADORES = "indicadores/"
 
 type Indicadores struct {
 	ID         bson.ObjectId `bson:"_id,omitempty"`
-	METADATA   Metadata
-	DOLARTODAY DolarToday
+	METADATA   Metadata      `bson:"metadata"`
+	DOLARTODAY DolarToday    `bson:"dolartoday"`
 }
 
 func (d *Indicadores) AgregarMetadata(metadata Metadata) {
@@ -18,7 +18,7 @@ func (d *Indicadores) AgregarMetadata(metadata Metadata) {
 }
 
 type Metadata struct {
-	Secuencia int `bson:"n"`
+	Secuencia int `bson:"n" json:"n"`
 	URL_prev  string
 	URL       string
 	URL_sig   string

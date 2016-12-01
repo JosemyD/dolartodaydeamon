@@ -4,9 +4,13 @@ import (
 	"dolartodaydeamon/controller"
 	"dolartodaydeamon/model"
 	"flag"
-	"fmt"
 	"github.com/vharitonsky/iniflags"
 	"gopkg.in/mgo.v2"
+	//	"gopkg.in/mgo.v2/bson"
+	"time"
+	"log"
+
+	"github.com/mitchellh/hashstructure"
 )
 
 var (
@@ -32,28 +36,66 @@ func main() {
 
 	db, err := controller.Connect(mongoDBDialInfo)
 	defer db.Session.Close()
+	colIndicadores := db.C(*dbColIndicadores)
 
 	if err != nil {
 		panic(err)
 	}
 
-	dolarToday := model.Indicadores{}
-	controller.GetJson(*dolarTodayUrl, &dolarToday.DOLARTODAY)
+	//idg := controller.NewIDGenerator(db)
 
-	idg := controller.NewIDGenerator(db)
+	for 1 == 1 {
+		dolarToday := model.Indicadores{}
+		controller.GetJson(*dolarTodayUrl, &dolarToday.DOLARTODAY)
 
-	for i := 0; i < 100; i++ {
-		n, err := idg.Next("indicadores")
+		var results model.Indicadores
+		err = colIndicadores.Find(nil).Sort("-metadata.n").One(&results)
+
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(n)
+
+		/*max := 1
+		var result model.Indicadores
+		for _, v := range results {
+			if v.METADATA.Secuencia >= max{
+				result = v
+				max = v.METADATA.Secuencia
+				fmt.Println(max)
+			}
+		}*/
+
+		log.Printf("BD Secuencia: %d", results.METADATA.Secuencia)
+		log.Printf("BD: %+v", results.DOLARTODAY)
+
+		hashBD, err := hashstructure.Hash(results.DOLARTODAY, nil)
+		if err != nil {
+			panic(err)
+		}
+
+		log.Printf("Hash BD: %d", hashBD)
+
+
+		log.Printf("DT: %+v", dolarToday.DOLARTODAY)
+
+		hashDT, err := hashstructure.Hash(dolarToday.DOLARTODAY, nil)
+		if err != nil {
+			panic(err)
+		}
+
+		log.Printf("Hash DT: %d", hashDT)
+
+		/*n, err := idg.Next("indicadores")
+		if err != nil {
+			panic(err)
+		}
 		withMetadata := model.Metadata{}
 		withMetadata.Metadata(n)
 		dolarToday.AgregarMetadata(withMetadata)
-		err = db.C(*dbColIndicadores).Insert(&dolarToday)
+		err = colIndicadores.Insert(&dolarToday)
 		if err != nil {
 			panic(err)
-		}
+		}*/
+		time.Sleep(7 * time.Second)
 	}
 }

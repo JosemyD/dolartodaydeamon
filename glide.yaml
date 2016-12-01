@@ -2,3 +2,4 @@ package: dolartodaydeamon
 import:
 - package: gopkg.in/mgo.v2
 - package: github.com/vharitonsky/iniflags
+- package: github.com/mitchellh/hashstructure
