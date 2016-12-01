@@ -85,7 +85,7 @@ func main() {
 			} else {
 				panic(err)
 			}
-			time.Sleep(time.Duration(*minCheckDT) * time.Second)
+			time.Sleep(time.Duration(*minCheckDT) * time.Minute)
 		}
 	}()
 
