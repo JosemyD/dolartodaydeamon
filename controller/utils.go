@@ -5,6 +5,7 @@ import (
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"net/http"
+	"os"
 )
 
 /*Autoincrement ID Mongo*/
@@ -64,4 +65,30 @@ func Connect(dialInfo *mgo.DialInfo) (*mgo.Database, error) {
 	db := session.DB("")
 
 	return db, err
+}
+
+func MongoDBDialInfo(dbHost string, dbName string, dbUser string, dbPassword string, dbSource string)(*mgo.DialInfo){
+	if os.Getenv("dbHost")!=""{
+		dbHost = os.Getenv("dbHost")
+	}
+	if os.Getenv("dbName")!=""{
+		dbHost = os.Getenv("dbName")
+	}
+	if os.Getenv("dbUser")!=""{
+		dbHost = os.Getenv("dbUser")
+	}
+	if os.Getenv("dbPassword")!=""{
+		dbHost = os.Getenv("dbPassword")
+	}
+	if os.Getenv("dbSource")!=""{
+		dbHost = os.Getenv("dbSource")
+	}
+
+	return &mgo.DialInfo{
+		Addrs:    []string{dbHost},
+		Database: dbName,
+		Username: dbUser,
+		Password: dbPassword,
+		Source:   dbSource,
+	}
 }

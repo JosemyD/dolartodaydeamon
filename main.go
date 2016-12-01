@@ -28,13 +28,7 @@ var (
 func main() {
 	iniflags.Parse()
 
-	mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:    []string{*dbHost},
-		Database: *dbName,
-		Username: *dbUser,
-		Password: *dbPassword,
-		Source:   *dbSource,
-	}
+	mongoDBDialInfo := controller.MongoDBDialInfo(*dbHost, *dbName, *dbUser, *dbPassword, *dbSource)
 
 	db, err := controller.Connect(mongoDBDialInfo)
 	defer db.Session.Close()
