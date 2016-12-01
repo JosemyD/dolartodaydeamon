@@ -22,7 +22,7 @@ var (
 	dbPassword       = flag.String("dbPassword", "", "Password del usuario de la base de datos")
 	dbSource         = flag.String("dbSource", "", "Base de datos utilizada para establecer credenciales y privilegios")
 	dbColIndicadores = flag.String("dbColIndicadores", "indicadores", "Colección para los indicadores")
-	minCheckDT       = flag.Int("minCheckDT", 1, "Minutos para revisar DolarToday por cambios")
+	minCheckDT       = flag.Int("minCheckDT", 0.5, "Minutos para revisar DolarToday por cambios")
 )
 
 func main() {
