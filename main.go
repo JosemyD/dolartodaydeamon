@@ -11,6 +11,7 @@ import (
 	"gopkg.in/mgo.v2"
 	"log"
 	"time"
+	"os"
 )
 
 var (
@@ -110,5 +111,11 @@ func main() {
 		}
 	})
 
-	iris.Listen(":8080")
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port =  "8080"
+	}
+
+	iris.Listen(":" + port)
 }
